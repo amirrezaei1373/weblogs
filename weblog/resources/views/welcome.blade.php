@@ -22,4 +22,6 @@
         <div class="title m-b-md">
             Post Blog
         </div>
+        <p> {{ session('mssg') }}</p>
+        <a href="/posts/create">Create your post</a>
 @endsection	

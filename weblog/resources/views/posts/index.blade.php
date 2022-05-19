@@ -88,7 +88,7 @@ footer {
     </div>
 
     @foreach($posts as $post)
-    <h1>Title: {{ $post->title }}</h1><br>
+    <a class="post" href="/posts/{{ $post->id }}"><h1>Title: {{ $post->title }}</h1><br></a>
     <h4>Description: {{ $post->description }}</h4><br>
     <p>Content: {{ $post->content }} </p>
     @endforeach

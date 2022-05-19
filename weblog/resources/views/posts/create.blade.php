@@ -86,6 +86,23 @@ footer {
             <div class="title m-b-md">
                 Create your own post!
             </div>
+            <div class="wrapper">
+              <form action="/posts" method="POST">
+                  @csrf
+                  <label for="title">Title:</label>
+                  <input type="text" name="title" id="title" required><br>
+
+                  <label for="description">description:</label>
+                  <input type="text" name="description" id="description" required><hr>
+
+                  <label for="content">Content:</label>
+
+                  <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+
+                  <input type="submit" value="create">
+
+              </form>
+            </div>
         </div>
         </div>
         <footer> copyright 2022 Amir rezaei </footer>

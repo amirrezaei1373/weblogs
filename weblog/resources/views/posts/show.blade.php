@@ -78,14 +78,25 @@ footer {
     padding: 20px;
     text-align: center;
 }
+.description{
+    font-size: 20px;
+    border: 1px solid #544125;
+}
         </style>
 </head>
     <body>
 <div class="flex-center position-ref full-height">
   <div class="content">
-    <div class="title m-b-md">
-        Post List - {{ $id }}
+    <div class="wrapper post-details">
+      <h1>Title: {{ $post->title }}</h1><br>
+      <h4 class="description">Description: {{ $post->description }}</h4><br>
+      <p class="content">Content: {{ $post->content }} </p>
     </div>
+    <form action="/posts/{{ $post->id }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button> Delete Post</button>
+    </form>
   </div>
 </div>
 <footer> copyright 2022 Amir rezaei </footer>

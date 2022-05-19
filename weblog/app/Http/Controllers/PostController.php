@@ -21,9 +21,9 @@ class PostController extends Controller
 
     public function show($id){
 
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
-        return view('posts.show', ["id" => $id]);
+        return view('posts.show', ["post" => $post]);
     }
 
 
@@ -32,4 +32,27 @@ class PostController extends Controller
 
         return view('posts.create');
     }
+
+    public function store(){
+
+        $post = new Post();
+        $post->title = request('title');
+        $post->description = request('description');
+        $post->content = request('content');
+
+        $post->save();
+
+        return redirect('/')->with('mssg', 'thanx for create a post');
+    }
+
+    public function destroy($id){
+
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        return redirect('/posts');
+    }
+
+    
 }
