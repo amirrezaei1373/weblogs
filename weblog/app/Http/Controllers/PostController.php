@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = [
-            ["type" => "special", "crust" => "thin","price" => 50],
-            ["type" => "mix", "crust" => "amir","price" => 330],
-            ["type" => "meat", "crust" => "garlic","price" => 40]    
-        ];
-    
+        
+        $posts = Post::all();
+
         $name = request('name');
-        return view('posts', [
+        return view('posts.index', [
             "posts" => $posts,
             "name" => $name
         ]);
@@ -22,6 +20,16 @@ class PostController extends Controller
     }
 
     public function show($id){
-        return view('details', ["id" => $id]);
+
+        $post = Post::find($id);
+
+        return view('posts.show', ["id" => $id]);
+    }
+
+
+    public function create(){
+
+
+        return view('posts.create');
     }
 }

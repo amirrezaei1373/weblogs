@@ -1,4 +1,18 @@
-html, body {
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Post blog</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
+        
+        <style>
+              html, body {
     background-color: #fff;
     color: #636b6f;
     font-family: 'Nunito', sans-serif;
@@ -64,3 +78,24 @@ footer {
     padding: 20px;
     text-align: center;
 }
+        </style>
+</head>
+    <body>
+<div class="flex-center position-ref full-height">
+  <div class="content">
+    <div class="title m-b-md">
+        Post List
+    </div>
+
+    @foreach($posts as $post)
+    <h1>Title: {{ $post->title }}</h1><br>
+    <h4>Description: {{ $post->description }}</h4><br>
+    <p>Content: {{ $post->content }} </p>
+    @endforeach
+
+  </div>
+</div>
+<footer> copyright 2022 Amir rezaei </footer>
+
+</body>
+</html>
