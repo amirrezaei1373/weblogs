@@ -60,7 +60,8 @@ class PostController extends Controller
     // use api for read all post
 
     public function post(){
-        return response()->json(Post::get(), 200);
+        $post = Post::paginate(2);
+        return response()->json($post, 200);
     }
 
     public function postById($id){
