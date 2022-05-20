@@ -57,12 +57,13 @@ class PostController extends Controller
         return view('posts.edit');
     }
 
-    // use api for read all post
+    // use api for read all post AND PAGINATE 2 PER PAGE
 
     public function post(){
         $post = Post::paginate(2);
         return response()->json($post, 200);
     }
+    // READ QUERY BY ID FUNCTIONS
 
     public function postById($id){
         $post = Post::find($id);
@@ -72,10 +73,14 @@ class PostController extends Controller
         return response()->json(Post::find($id), 200);
     }
 
+    // CREATE QUERY FUNCTIONS
+
     public function postSave(Request $request){
         $post = Post::Create($request->all());
         return response()->json($post, 201);
     }
+
+    // EDIT QUERY FUNCTIONS
 
     public function postUpdate(Request $request, $id){
         $post = Post::find($id);
@@ -85,6 +90,7 @@ class PostController extends Controller
         $post->update($request->all());
         return response()->json($post, 200);
     }
+    // DELETE QUERY FUNCTIONS
 
     public function postDelete(Request $request, $id){
         $post = Post::find($id);
@@ -94,5 +100,13 @@ class PostController extends Controller
         $post->delete();
         return response()->json(null, 204);
     
+    }
+
+    // SEARCH BY TITLE DESCRIPTION & CONTENT
+    public function postSearch($q){
+        $post = Post::where('title', 'LIKE', '%'.$q.'%')
+                   ->orWhere('description','LIKE', '%'.$q.'%')
+                   ->orWhere('content','LIKE', '%'.$q.'%')->get();
+        return $post;
     }
 }

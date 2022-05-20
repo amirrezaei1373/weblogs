@@ -22,5 +22,6 @@ Route::get('post/{id}', 'PostController@postById');
 Route::post('post', 'PostController@postSave');
 Route::put('post/{id}', 'PostController@postUpdate');
 Route::delete('post/{id}', 'PostController@postDelete');
+Route::get('post/search/{q}', 'PostController@postSearch');
 
 // Route::apiResponse('post', 'post1');
