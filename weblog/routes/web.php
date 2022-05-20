@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/posts/update','PostController@update');
+
 Route::get('/posts', 'PostController@index');
 
 Route::get('/posts/create','PostController@create');
@@ -25,3 +27,7 @@ Route::get('/posts/{id}','PostController@show');
 
 Route::delete('/posts/{id}','PostController@destroy');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

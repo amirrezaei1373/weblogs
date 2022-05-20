@@ -87,17 +87,9 @@ footer {
     <body>
 <div class="flex-center position-ref full-height">
   <div class="content">
-    <div class="wrapper post-details">
-      <h1>Title: {{ $post->title }}</h1><br>
-      <h4 class="description">Description: {{ $post->description }}</h4><br>
-      <p class="content">Content: {{ $post->content }} </p>
-    </div>
-    <form action="/posts/{{ $post->id }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button> Delete Post</button>
-    </form>
-    <a href="/posts/update">edit</a>
+    <h1>hello</h1>
+     
+    
   </div>
 </div>
 <footer> copyright 2022 Amir rezaei </footer>
