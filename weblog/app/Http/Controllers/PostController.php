@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Validator;
 
 class PostController extends Controller
 {
@@ -76,9 +77,46 @@ class PostController extends Controller
     // CREATE QUERY FUNCTIONS
 
     public function postSave(Request $request){
-        $post = Post::Create($request->all());
+        if(!$request->hasFile('fileName')) {
+            return response()->json(['upload_file_not_found'], 400);
+        }
+     
+        $allowedfileExtension=['pdf','jpg','png'];
+        $files = $request->file('fileName'); 
+        $errors = [];
+     
+        foreach ($files as $file) {      
+     
+            $extension = $file->getClientOriginalExtension();
+     
+            $check = in_array($extension,$allowedfileExtension);
+     
+            if($check) {
+                foreach($request->fileName as $mediaFiles) {
+     
+                    $path = $mediaFiles->store('public');
+                    $name = $mediaFiles->getClientOriginalName();
+          
+                    $save = new Post();
+                    $save->title = request('title');
+                    $save->description = request('description');
+                    $save->content = request('content');
+                    $save->imagetitle = $name;
+                    $save->path = $path;
+                    $save->save();
+                }
+            } else {
+                return response()->json(['invalid_file_format'], 422);
+            }
+     
+            return response()->json(['file_uploaded'], 200);
+     
+        }
+        $post = Post::create($request->all());
         return response()->json($post, 201);
     }
+
+
 
     // EDIT QUERY FUNCTIONS
 
@@ -109,4 +147,5 @@ class PostController extends Controller
                    ->orWhere('content','LIKE', '%'.$q.'%')->get();
         return $post;
     }
+
 }
